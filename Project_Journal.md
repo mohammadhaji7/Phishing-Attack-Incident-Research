@@ -10,17 +10,17 @@ Initialize the project workspace for the research project on a phishing attack i
 
 ### Work Performed
 
-- Created the project directory.
-- Created folders for research, incident analysis, simulation, metrics, detection, security controls, screenshots, documentation, reports, presentation, references, and policies.
-- Created the initial README.md and Project_Journal.md files.
-- Initialized the Git repository.
-- Created the main branch.
-- Configured Git identity.
+* Created the project directory.
+* Created folders for research, incident analysis, simulation, metrics, detection, security controls, screenshots, documentation, reports, presentation, references, and policies.
+* Created the initial README.md and Project\_Journal.md files.
+* Initialized the Git repository.
+* Created the main branch.
+* Configured Git identity.
 
 ### Tools Used
 
-- Windows PowerShell
-- Git
+* Windows PowerShell
+* Git
 
 ### Result
 
@@ -28,7 +28,7 @@ The initial project workspace was created successfully.
 
 ### Screenshot References
 
-- Screenshots/01_Setup/01_project_structure.png
+* Screenshots/01\_Setup/01\_project\_structure.png
 
 ### Problems Encountered
 
@@ -49,3 +49,26 @@ Practical work, measurements, screenshots, challenges, and observations will be 
 ### Next Step
 
 Validate and select the real-world phishing incident using authoritative sources.
+
+## 19 August 2026 — Phishing Simulation Lab Setup
+
+
+
+\- Completed incident research and analysis documentation.
+
+\- Completed phishing simulation planning.
+
+\- Compared GoPhish, King Phisher, and SET; selected GoPhish.
+
+\- Configured Kali Linux VM to use VirtualBox NAT instead of Bridged networking.
+
+\- Verified Kali internet connectivity.
+
+\- Downloaded GoPhish v0.12.1 from the official GitHub release.
+
+\- Verified the SHA-256 checksum successfully.
+
+\- Extracted GoPhish and inspected the default configuration.
+
+\- Practical GoPhish configuration and startup will continue in the next session.
+
