@@ -1,461 +1,229 @@
-\# Attack Chain Analysis
+# IEH Corporation Phishing Attack Chain Analysis
 
+## 1. Overview
 
+The IEH Corporation incident involved a targeted phishing attack in which an attacker impersonated a prospective business contact and used a fraudulent Microsoft document-sharing link as the initial lure.
 
-### \## 1. Social Engineering and Initial Targeting
+The attack relied primarily on social engineering and credential phishing rather than malware execution. The objective was to persuade an employee to interact with what appeared to be a legitimate business document-sharing request and subsequently enter Microsoft 365 credentials into a fraudulent login page.
 
+The incident demonstrates how a single successful phishing interaction can provide an attacker with access to a business mailbox containing sensitive organizational information.
 
-
-\### What the Attacker Did
-
-
-
-The attackers targeted Twitter employees by impersonating Twitter's internal IT/help-desk personnel. They used social-engineering techniques to convince employees that they needed assistance with a VPN-related issue.
-
-
-
-\### Why It Worked
-
-
-
-The attack relied on employee trust in what appeared to be a legitimate internal support interaction. The attackers used the identity and context of IT support to make the request appear credible.
-
-
-
-\### Security Weakness
-
-
-
-The incident demonstrates the risk of relying on employee trust when attackers can convincingly impersonate internal support personnel.
-
-
-
-\### Evidence
-
-
-
-\- NYDFS Investigation
-
-\- Twitter Official Incident Disclosure
-
-
-
-\### Analysis
-
-
-
-This stage was important because the attackers did not initially need to exploit a technical vulnerability in Twitter's infrastructure. Instead, they targeted the human element of the security system.
-
-
-
-
-
-### \## 2. Fake VPN Website and Credential Capture
-
-
-
-\### What the Attacker Did
-
-
-
-The attackers directed targeted employees to a fraudulent website designed to resemble Twitter's legitimate VPN login page.
-
-
-
-The fake page was used to capture employee login credentials when they were entered.
-
-
-
-\### Why It Worked
-
-
-
-The fraudulent website appeared similar to a legitimate Twitter authentication page, making it easier for the attackers to convince employees that the login request was genuine.
-
-
-
-\### Security Weakness
-
-
-
-The incident demonstrates the risk of credential-based authentication when users can be deceived into entering credentials into fraudulent websites.
-
-
-
-\### Evidence
-
-
-
-\- NYDFS Investigation
-
-
-
-\### Analysis
-
-
-
-The phishing website transformed the social-engineering interaction into a credential-compromise opportunity. Once the attackers obtained valid employee credentials, they could attempt to use those credentials against legitimate Twitter systems.
-
-
-
-
-### \## 3. MFA Interaction and Internal Access
-
-
-
-\### What the Attacker Did
-
-
-
-The attackers used the compromised employee credentials to attempt authentication to legitimate Twitter systems. This generated MFA authentication requests.
-
-
-
-After obtaining access, the attackers investigated Twitter's internal environment and identified employees with access to internal account-support tools.
-
-
-
-\### Why It Worked
-
-
-
-The attackers combined stolen credentials with social engineering during the authentication process. This allowed them to move beyond the initial credential compromise and gain access to internal systems.
-
-
-
-\### Security Weakness
-
-
-
-The incident demonstrates that MFA alone may not prevent an attack when attackers can manipulate users into approving authentication requests or otherwise abuse the authentication process.
-
-
-
-\### Evidence
-
-
-
-\- NYDFS Investigation
-
-\- Twitter Official Incident Disclosure
-
-
-
-\### Analysis
-
-
-
-The attack shows the importance of combining strong authentication with phishing-resistant authentication methods, employee awareness, access controls, and monitoring.
-
-
-## 4. Privileged Internal Tools
 ---
 
+## 2. Attack Chain
 
+### Stage 1 — Business Contact Impersonation
 
-\### What the Attacker Did
+The attacker impersonated a prospective business contact to make the communication appear relevant to the employee's normal business activities.
 
+This increased the credibility of the phishing message because the request was presented within a business context rather than as an obviously suspicious unsolicited message.
 
+**Technique:** Social engineering / trusted-contact impersonation
 
-After gaining access to Twitter's internal environment, the attackers identified employees who had access to internal tools used to manage Twitter accounts.
+---
 
+### Stage 2 — Fraudulent Document-Sharing Lure
 
+The employee received a link presented as a Microsoft document-sharing request.
 
-The attackers then targeted these employees to obtain access to the account-support functionality.
+The use of a familiar document-sharing workflow was significant because employees commonly receive legitimate requests to review or access business documents electronically.
 
+The attack therefore relied on contextual trust and familiarity rather than requiring sophisticated malware.
 
+**Technique:** Spear phishing link / document-sharing lure
 
-\### Why It Worked
+---
 
+### Stage 3 — Fraudulent Microsoft 365 Login Page
 
+Following the phishing link, the employee was presented with a fraudulent Microsoft 365-style authentication page.
 
-The initial compromise provided the attackers with an opportunity to understand Twitter's internal environment and identify users with higher levels of access.
+The page was designed to resemble a legitimate authentication workflow and was used to obtain the employee's credentials.
 
+This represents the credential-phishing stage of the attack.
 
+**Technique:** Credential phishing / fraudulent authentication page
 
-\### Security Weakness
+---
 
+### Stage 4 — Credential Exposure
 
+The employee entered credentials into the fraudulent authentication page.
 
-Excessive or highly concentrated privileges can increase the impact of a compromised employee account.
+This provided the attacker with authentication information that could be used to access the employee's mailbox.
 
+No malware installation was required for this stage of the attack.
 
+---
 
-\### Evidence
+### Stage 5 — Mailbox Access
 
+Using the compromised credentials, the attacker gained access to the employee's mailbox.
 
+The mailbox contained business information including customer communications and purchase-order information.
 
-\- NYDFS Investigation
+The incident therefore moved from an initial phishing interaction into an unauthorized access and information-exposure event.
 
-\- Twitter Official Incident Disclosure
+---
 
+### Stage 6 — Sensitive Information Exposure
 
+Information accessible through the mailbox included:
 
-\### Analysis
+- Customer communications
+- Purchase orders
+- Export-controlled engineering documentation
 
+The presence of export-controlled engineering information significantly increased the potential impact of the compromise.
 
+Unauthorized access to such information can create confidentiality, regulatory, contractual, and national-security-related concerns depending on the specific information involved and applicable export-control requirements.
 
-This stage demonstrates the importance of least privilege, privileged-access controls, monitoring of administrative activity, and separation of critical administrative functions.
+Importantly, the available incident reporting does **not establish confirmed exfiltration of the information**. The analysis therefore treats this as unauthorized access and potential exposure rather than confirmed data theft.
 
+---
 
+### Stage 7 — Malicious Mailbox Rules
 
+The attacker established malicious mailbox rules after gaining access.
 
+Mailbox rules can provide persistence by automatically processing, redirecting, hiding, or otherwise manipulating messages according to attacker-controlled conditions.
 
-### \## 5. Account Compromise and Information Exposure
+In this incident, the malicious rules demonstrated that the compromise was not limited to the initial credential access.
 
+The attacker attempted to maintain useful access to the compromised mailbox through changes to the mailbox environment.
 
+**Technique:** Email collection/persistence through malicious mailbox rules
 
-\### What the Attacker Did
+---
 
+### Stage 8 — Organizational Response
 
+Following discovery of the incident, IEH secured the affected account and disabled the malicious mailbox rules.
 
-Using access to Twitter's internal account-support tools, the attackers compromised targeted Twitter accounts and accessed information associated with some of those accounts.
+The organization also reviewed authentication controls as part of its response.
 
+These actions addressed both the compromised identity and the persistence mechanism identified during the incident.
 
+---
 
-Twitter reported:
+---
 
+## 4. Attack Characteristics
 
+The incident demonstrates several important characteristics of modern phishing attacks.
 
-\- 130 accounts were targeted.
+### Social Engineering
 
-\- 45 accounts were used to send Tweets.
+The attacker relied on a believable business scenario rather than an obviously malicious message.
 
-\- 36 accounts had their direct-message inbox accessed.
+### Credential Phishing
 
-\- 7 accounts had Twitter data downloaded.
+The fraudulent authentication page was used to obtain employee credentials.
 
+### Identity-Based Attack
 
+The compromise of a legitimate employee account provided access to information that would not normally be available to an external attacker.
 
-\### Why It Mattered
+### Business Email Compromise Risk
 
+Once mailbox access was obtained, the attacker could potentially observe or manipulate business communications and information.
 
+### Persistence
 
-Access to internal account-management functionality allowed the attackers to move from compromising individual employees to affecting Twitter user accounts.
+The malicious mailbox rules demonstrated an attempt to maintain useful access to the compromised mailbox after the initial credential compromise.
 
+### Data Confidentiality Risk
 
+The mailbox contained sensitive business and engineering information, including export-controlled documentation.
 
-\### Security Weakness
+---
 
+## 5. Key Security Lessons
 
+The IEH incident demonstrates that phishing defenses cannot rely solely on detecting obviously malicious emails.
 
-The incident demonstrates how compromise of privileged internal tools can significantly increase the impact of an otherwise limited employee compromise.
+The attack used:
 
+1. A believable business relationship
+2. A familiar document-sharing workflow
+3. A trusted-looking authentication experience
+4. A legitimate employee identity
+5. Access to a valuable business mailbox
 
+This means organizations should combine technical controls with employee awareness, strong authentication, email security, mailbox monitoring, and effective incident-reporting procedures.
 
-\### Evidence
+---
 
+## 6. Relationship to the Controlled Lab Simulation
 
+The controlled phishing simulation developed for this project reproduces the relevant social-engineering concept in an isolated environment.
 
-\- Twitter Official Incident Disclosure
+The simulation uses:
 
-\- NYDFS Investigation
+- GoPhish as the phishing-simulation framework
+- A controlled phishing email
+- A document-sharing-style lure
+- A controlled landing page
+- A benign "View Shared Document" action
+- A controlled reporting action
+- A segmented test-user group
+- Campaign interaction metrics
 
+The simulation does not reproduce the IEH incident against real systems or users.
 
+It deliberately avoids:
 
-\### Analysis
+- Malware
+- Executable payloads
+- Destructive actions
+- Real credential collection
+- Unauthorized targets
+- Real sensitive information
 
+The purpose is to demonstrate the relevant phishing attack behavior safely and evaluate phishing-awareness controls.
 
+---
 
-The incident illustrates the importance of protecting privileged administrative tools with strong authentication, least privilege, monitoring, and additional verification for high-risk actions.
+## 7. Scope and Limitations
 
+The analysis is based on publicly reported information regarding the IEH incident and evidence collected from the controlled laboratory simulation.
 
+The available reporting establishes unauthorized mailbox access and the presence of sensitive information within the mailbox. It does not establish confirmed exfiltration of that information.
 
+The laboratory does not attempt to reproduce every technical aspect of the real incident. It focuses specifically on the phishing, credential-exposure, landing-page interaction, benign payload, and reporting-awareness components required by the project.
 
+Host-level Sysmon correlation was attempted during the laboratory work, but the available results were inconclusive and therefore are not treated as a confirmed detection result.
 
-### \## 6. Financial Impact
+---
 
+## 8. Security Significance
 
+The incident demonstrates how phishing can act as an entry point to sensitive organizational information without requiring malware or exploitation of a technical vulnerability.
 
-\### What Happened
+For organizations handling defense-related engineering information, customer data, and export-controlled material, protection of employee identities and mailboxes is therefore a critical component of information security.
 
+The most important lesson is that the security boundary is not limited to servers and network infrastructure. A compromised employee identity and mailbox can provide an attacker with access to highly valuable information.
 
+---
 
-The attackers used compromised Twitter accounts to promote a cryptocurrency scam.
+## 3. Simplified Attack Flow
 
-
-
-The NYDFS investigation reported that more than $118,000 worth of Bitcoin was transferred to attacker-controlled addresses.
-
-
-
-\### Impact
-
-
-
-The incident therefore resulted in:
-
-
-
-\- Unauthorized use of Twitter accounts.
-
-\- Exposure of account-related information.
-
-\- Access to some direct messages.
-
-\- Download of Twitter data from some accounts.
-
-\- Financial loss to individuals who responded to the fraudulent cryptocurrency campaign.
-
-\- Significant reputational and operational consequences for Twitter.
-
-
-
-\### Evidence
-
-
-
-\- NYDFS Investigation
-
-\- Twitter Official Incident Disclosure
-
-
-
-\### Analysis
-
-
-
-The financial impact demonstrates how an account compromise can be converted into direct financial fraud, particularly when attackers gain control of trusted accounts.
-
-
-
-
-
-### \## 7. Detection and Response
-
-
-
-\### What Happened
-
-
-
-Twitter identified the incident and took steps to restrict compromised accounts and limit attacker access.
-
-
-
-The company investigated the incident, worked with law enforcement and external investigators, and implemented additional security measures.
-
-
-
-\### Response Objectives
-
-
-
-The response focused on:
-
-
-
-1\. Containing the compromised accounts.
-
-2\. Restricting unauthorized access.
-
-3\. Investigating the attack.
-
-4\. Restoring affected accounts.
-
-5\. Understanding how the attackers gained access.
-
-6\. Strengthening security controls.
-
-
-
-\### Evidence
-
-
-
-\- Twitter Official Incident Disclosure
-
-\- NYDFS Investigation
-
-
-
-\### Analysis
-
-
-
-The response demonstrates the importance of rapid containment, investigation, access revocation, and post-incident security improvements.
-
-
-
-
-
-### \## 8. Overall Attack Chain
-
-
-
-The documented attack can be summarized as:
-
-
-
-Social Engineering
-
-↓
-
-Fake IT / Help-Desk Interaction
-
-↓
-
-Fraudulent Twitter VPN Website
-
-↓
-
-Employee Credential Capture
-
-↓
-
-MFA Interaction
-
-↓
-
-Internal System Access
-
-↓
-
-Identification of Privileged Account-Support Access
-
-↓
-
-Account Compromise
-
-↓
-
-Information Exposure
-
-↓
-
-Cryptocurrency Fraud
-
-↓
-
-Detection and Response
-
-
-
-
-
-### \## 9. Key Security Lessons
-
-
-
-The incident demonstrates that phishing-related attacks can involve multiple security weaknesses rather than a single failure.
-
-
-
-Key lessons include:
-
-
-
-\- Employees should be trained to recognize social-engineering attempts.
-
-\- Authentication should use phishing-resistant methods where possible.
-
-\- Privileged access should follow the principle of least privilege.
-
-\- Administrative tools require strong access controls and monitoring.
-
-\- Suspicious authentication activity should be detected quickly.
-
-\- High-risk account actions should receive additional verification.
-
-\- Organizations should maintain an effective incident-response process.
-
+```text
+Prospective Business Contact Impersonation
+                    ↓
+       Fake Microsoft Document Link
+                    ↓
+       Fraudulent M365 Login Page
+                    ↓
+          Employee Credential Entry
+                    ↓
+             Mailbox Access
+                    ↓
+       Sensitive Information Exposure
+                    ↓
+        Malicious Mailbox Rules
+             (Persistence)
+                    ↓
+       Account Secured / Rules Removed
+                    ↓
+       Authentication Controls Reviewed

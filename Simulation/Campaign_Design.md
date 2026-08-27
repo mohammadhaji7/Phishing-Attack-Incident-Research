@@ -1,242 +1,218 @@
-\# Phishing Simulation Campaign Design
+﻿# Phishing Simulation Campaign Design
 
+## 1. Campaign Objective
 
+The objective of the controlled phishing simulation is to evaluate how an authorized test user interacts with a believable business-context phishing email.
 
-\## 1. Campaign Objective
+The campaign is informed by the social-engineering characteristics identified in the IEH Corporation phishing incident.
 
+The simulation focuses on:
 
+- Business-context phishing
+- Document-sharing-style social engineering
+- Controlled link interaction
+- Benign landing-page interaction
+- Security-reporting behavior
+- Campaign interaction measurement
 
-The objective is to measure how test users respond to a controlled phishing scenario based on the social-engineering techniques identified in the Twitter incident.
+---
 
+## 2. Target Group
 
+The campaign uses only authorized laboratory test accounts.
 
-The campaign will establish a baseline for phishing awareness.
+No real employees, external organizations, or unauthorized recipients are targeted.
 
+The test environment is isolated and controlled for cybersecurity research purposes.
 
+---
 
-\---
+## 3. Email Scenario
 
+The simulated email uses a business document-sharing theme.
 
+The message is designed to resemble a legitimate request to access or review a shared document.
 
-\## 2. Target Group
+The campaign includes:
 
+- A controlled sender identity
+- A business-context message
+- A controlled phishing link
+- A document-sharing-style lure
+- No malicious attachment
+- No malware
 
+The scenario is based on the relevant phishing characteristics of the IEH incident rather than attempting to reproduce the incident itself.
 
-The campaign will use only authorized test accounts.
+---
 
+## 4. Landing Page
 
+The phishing link directs the authorized test user to a controlled landing page hosted within the laboratory environment.
 
-No real employees or unauthorized external recipients will be targeted.
+The landing page provides controlled interaction options including:
 
+- **View Shared Document**
+- **Report This Email as Suspicious**
 
+The landing page does not collect real credentials.
 
-\---
+The simulation is designed to demonstrate user interaction without compromising real accounts or systems.
 
+---
 
+## 5. Benign Payload
 
-\## 3. Email Scenario
+The **View Shared Document** action represents a benign payload interaction.
 
+It is intentionally harmless and does not deploy malware, execute destructive actions, or access sensitive information.
 
+The purpose is to demonstrate the type of interaction that can occur after a user follows a phishing link while maintaining a safe laboratory environment.
 
-The simulated message will use an internal IT/security theme involving verification of VPN access.
+---
 
+## 6. Reporting Behavior
 
+The **Report This Email as Suspicious** action represents the user's security-reporting behavior.
 
-The message will contain:
+During validation, the action was observed to navigate to the controlled `#report` page section.
 
+This demonstrates that the reporting interaction works at the landing-page level.
 
+However, a reporting percentage will only be included in the final analysis if GoPhish campaign results confirm that the reporting action was recorded as a distinct tracked event.
 
-\- A simulated sender identity.
+No reporting metric will be estimated or fabricated.
 
-\- A short security-related message.
+---
 
-\- A controlled link.
+## 7. Campaign Metrics
 
-\- No malicious attachment.
+The campaign results are based only on events actually recorded by the laboratory and GoPhish.
 
-\- No real corporate branding.
+Potentially measurable metrics include:
 
-
-
-\---
-
-
-
-\## 4. Landing Page
-
-
-
-The landing page will be hosted within the controlled laboratory environment.
-
-
-
-It will simulate a login page but will not collect or retain real passwords.
-
-
-
-If a dummy credential submission is tested, only predefined dummy values will be used.
-
-
-
-\---
-
-
-
-\## 5. Campaign Metrics
-
-
-
-The following metrics will be collected where supported:
-
-
-
-| Metric | Purpose |
-
+| Metric | Measurement Purpose |
 |---|---|
+| Email delivery | Confirm campaign delivery |
+| Email interaction | Determine whether the test email was accessed, where supported |
+| Link click | Measure interaction with the controlled phishing link |
+| Landing-page interaction | Confirm access to the simulated phishing page |
+| Benign payload interaction | Determine whether the document action was selected |
+| Reporting event | Determine whether the reporting action was separately tracked |
+| Reporting rate | Calculated only if a distinct GoPhish reporting event exists |
 
-| Emails delivered | Determine campaign reach |
+If a metric is not supported by the available evidence, it will be reported as unavailable rather than estimated.
 
-| Emails opened | Measure interaction with the message |
+---
 
-| Link clicks | Measure susceptibility to the simulated phishing link |
+## 8. Campaign Results
 
-| Dummy submissions | Measure simulated credential-entry behavior |
+The campaign results are documented using the available GoPhish campaign evidence and laboratory screenshots.
 
-| Reports | Measure security awareness |
+The project does not claim additional campaign activity that is not supported by the recorded evidence.
 
-| Time to report | Measure response speed, if available |
+The final report will distinguish between:
 
+- Events confirmed by GoPhish
+- Events observed directly during browser validation
+- Events that could not be independently measured
 
+---
 
-\---
+## 9. Reporting Rate Limitation
 
+The reporting interaction requires specific validation because the **Report This Email as Suspicious** button currently navigates to the controlled `#report` page section.
 
+A page-level navigation event does not by itself prove that GoPhish recorded a separate reporting event.
 
-\## 6. Baseline Measurement
+Therefore:
 
+**Reporting Rate = Reported Emails / Emails Delivered × 100**
 
+will only be calculated if the GoPhish campaign results contain a distinct tracked reporting event.
 
-The first campaign will establish the baseline awareness level.
+If no such event exists, the final report will describe the reporting behavior qualitatively and state that a reliable reporting rate was unavailable.
 
+---
 
+## 10. Evidence Collection
 
-No awareness training will be provided immediately before the baseline test.
+Evidence collected for the campaign includes:
 
+- GoPhish configuration
+- Email template
+- SMTP/email delivery evidence
+- Controlled landing page
+- Benign payload interaction
+- GoPhish campaign results
+- Reporting behavior validation
+- Test-user group configuration
 
+Screenshots are organized within the project `Screenshots` directory according to the documented project structure.
 
-The results will be recorded using actual campaign data.
+---
 
+## 11. Safety Controls
 
+The campaign remains strictly controlled and authorized.
 
-\---
+The simulation does not use:
 
+- Real employee accounts
+- Unauthorized recipients
+- Real passwords
+- Real credential harvesting
+- Malware
+- Destructive payloads
+- Unauthorized system access
+- Real sensitive organizational information
+- Data exfiltration
 
+All interactions are performed within the controlled laboratory environment.
 
-\## 7. Awareness Intervention
+---
 
+## 12. Relationship to the IEH Incident
 
+The campaign reproduces selected characteristics of the IEH phishing incident at a safe conceptual level.
 
-After the baseline measurement, a short awareness session will explain:
+| IEH Incident | Controlled Campaign |
+|---|---|
+| Prospective business-contact impersonation | Business-context phishing lure |
+| Fraudulent document-sharing communication | Document-sharing-style email |
+| Fraudulent Microsoft authentication workflow | Controlled landing page |
+| Credential compromise | Not performed using real credentials |
+| Mailbox access | Not reproduced |
+| Sensitive information exposure | Not reproduced |
+| Malicious mailbox rules | Not reproduced |
+| Security awareness/reporting | Reporting interaction tested |
 
+The campaign therefore evaluates the initial phishing and user-awareness aspects without reproducing the harmful post-compromise stages of the real incident.
 
+---
 
-\- Phishing indicators.
+## 13. Scope and Limitations
 
-\- IT-support impersonation.
+The campaign is intentionally narrower than the real IEH incident.
 
-\- Suspicious URLs.
+It does not attempt to reproduce:
 
-\- Fake login pages.
+- Microsoft 365 account compromise
+- Real mailbox access
+- Export-controlled information access
+- Malicious mailbox persistence
+- Confirmed data exfiltration
+- Unauthorized external systems
 
-\- MFA manipulation.
+The campaign is a controlled cybersecurity simulation designed to demonstrate phishing behavior and evaluate available awareness and reporting mechanisms.
 
-\- Safe reporting procedures.
+---
 
+## 14. Final Assessment
 
+The controlled campaign successfully provides laboratory evidence for the phishing workflow, landing-page interaction, benign user interaction, and reporting behavior at the page level.
 
-\---
+GoPhish campaign results are used wherever they provide measurable evidence.
 
-
-
-\## 8. Retest
-
-
-
-If the laboratory setup supports it, a second campaign using a different safe scenario will be conducted after the awareness intervention.
-
-
-
-The second campaign will be compared with the baseline.
-
-
-
-\---
-
-
-
-\## 9. Quantitative Analysis
-
-
-
-The following calculations will be used where sufficient data is available:
-
-
-
-Click Rate = Link Clicks / Emails Delivered × 100
-
-
-
-Dummy Submission Rate = Dummy Submissions / Emails Delivered × 100
-
-
-
-Reporting Rate = Reported Emails / Emails Delivered × 100
-
-
-
-Where a metric cannot be measured reliably, it will be marked as unavailable rather than estimated.
-
-
-
-\---
-
-
-
-\## 10. Evidence
-
-
-
-Screenshots will be captured for important stages including:
-
-
-
-\- Campaign configuration.
-
-\- Test email.
-
-\- Landing page.
-
-\- Campaign results.
-
-\- Metrics.
-
-\- Validation.
-
-\- Before/after comparison.
-
-
-
-\---
-
-
-
-\## 11. Safety
-
-
-
-The campaign will remain strictly controlled and authorized.
-
-
-
-No real credentials, personal information, or unauthorized recipients will be used.
+Where a behavior cannot be independently recorded as a GoPhish event, the final report will explicitly identify the limitation rather than assigning an unsupported numerical value.
 

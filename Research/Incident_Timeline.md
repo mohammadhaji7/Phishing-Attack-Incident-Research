@@ -1,378 +1,209 @@
-\# Twitter 2020 Incident Timeline
+# IEH Corporation Incident Timeline
 
+## 1. Incident Overview
 
+**Organization:** IEH Corporation
 
-\## Incident
+**Incident Discovery:** 4 August 2026
 
+**Public Disclosure:** 6–7 August 2026
 
+**Incident Type:** Targeted Phishing / Credential Phishing / Business Email Compromise Risk
 
-\*\*Organization:\*\* Twitter  
+The incident involved a phishing communication in which an attacker impersonated a prospective business contact and used a fraudulent Microsoft document-sharing workflow to obtain employee credentials.
 
-\*\*Incident Date:\*\* 15 July 2020  
+The available reporting establishes the sequence of phishing, credential compromise, unauthorized mailbox access, sensitive information accessibility, malicious mailbox-rule activity, and subsequent containment.
 
-\*\*Incident Type:\*\* Social Engineering / Vishing / Phishing
+---
 
+## 2. Documented Incident Sequence
 
+### 1. Prospective Business Contact Impersonation
 
-\---
+**Event:**
 
+The attacker impersonated a prospective business contact and used a believable business context for the communication.
 
+**Significance:**
 
-\## Timeline
+The business context increased the credibility of the phishing attempt and provided a plausible reason for the employee to interact with the message.
 
+---
 
+### 2. Fraudulent Document-Sharing Communication
 
-\### 1. Initial Social Engineering
+**Event:**
 
+The attacker sent a fraudulent Microsoft document-sharing communication.
 
+The communication directed the employee toward a Microsoft-style authentication experience.
 
-\*\*Date:\*\* 15 July 2020
+**Significance:**
 
+The phishing attempt relied on a familiar business workflow rather than malware or a destructive payload.
 
+---
 
-\*\*Event:\*\*
+### 3. Credential Phishing
 
+**Event:**
 
+The fraudulent authentication page was used to obtain the employee's Microsoft 365 credentials.
 
-Attackers targeted Twitter employees using social-engineering techniques while impersonating Twitter's internal IT/help-desk personnel.
+**Significance:**
 
+The attacker obtained authentication information that enabled subsequent unauthorized access to the affected mailbox.
 
+---
 
-\*\*Evidence Source:\*\*
+### 4. Unauthorized Mailbox Access
 
+**Event:**
 
+The attacker gained unauthorized access to the affected employee mailbox.
 
-\- NYDFS Investigation
+**Information Accessible:**
 
-\- Twitter Official Incident Disclosure
+- Customer communications
+- Purchase-order information
+- Export-controlled engineering documentation
 
+**Significance:**
 
+The compromise progressed from credential phishing to unauthorized access to business information.
 
-\*\*Observation:\*\*
+---
 
+### 5. Sensitive Information Accessibility
 
+**Event:**
 
-The attack initially targeted employees rather than directly attacking Twitter's public-facing infrastructure.
+Sensitive business and engineering information was accessible through the compromised mailbox.
 
+The mailbox included export-controlled engineering documentation.
 
+**Evidence Limitation:**
 
-\---
+Available reporting does not establish confirmed exfiltration of the sensitive information.
 
+The project therefore distinguishes between unauthorized access or accessibility and confirmed data theft.
 
+---
 
-\### 2. Phishing / Fake VPN Page
+### 6. Malicious Mailbox Rules
 
+**Event:**
 
+The attacker established malicious mailbox rules after gaining mailbox access.
 
-\*\*Event:\*\*
+**Significance:**
 
+The rules represented an additional mailbox-level persistence or monitoring mechanism.
 
+The available reporting does not establish the exact time at which the rules were created.
 
-Targeted employees were directed to a fraudulent website designed to resemble Twitter's legitimate VPN login page.
+---
 
+### 7. Incident Discovery
 
+**Date:** 4 August 2026
 
-\*\*Evidence Source:\*\*
+**Event:**
 
+IEH identified unauthorized activity involving the affected employee account.
 
+**Significance:**
 
-\- NYDFS Investigation
+The discovery initiated the organization's containment and investigation activities.
 
+---
 
+### 8. Account Containment
 
-\*\*Observation:\*\*
+**Event:**
 
+IEH secured the affected account.
 
+**Significance:**
 
-The fraudulent page was used to obtain employee login credentials.
+Securing the account addressed the compromised identity and reduced the opportunity for continued unauthorized access.
 
+---
 
+### 9. Malicious Rule Removal
 
-\---
+**Event:**
 
+IEH disabled the malicious mailbox rules established by the attacker.
 
+**Significance:**
 
-\### 3. Credential Compromise
+Removing the unauthorized mailbox configuration addressed the identified persistence mechanism.
 
+---
 
+### 10. Authentication Control Review
 
-\*\*Event:\*\*
+**Event:**
 
+IEH reviewed authentication controls following the incident.
 
+**Significance:**
 
-Credentials entered by targeted employees were captured by the attackers.
+The review addressed the authentication component of the compromise and the organization's ability to reduce the risk of similar credential-phishing attacks.
 
+---
 
+### 11. Public Disclosure
 
-\*\*Evidence Source:\*\*
+**Date:** 6–7 August 2026
 
+**Event:**
 
+The incident was publicly disclosed through IEH's regulatory reporting.
 
-\- NYDFS Investigation
+**Significance:**
 
-\- Twitter Official Incident Disclosure
+The disclosure provided formal information concerning the incident, affected account, accessible information, and response actions.
 
+---
 
+## 3. Simplified Incident Timeline
 
-\*\*Observation:\*\*
-
-
-
-The compromised employee credentials provided the attackers with an initial foothold.
-
-
-
-\---
-
-
-
-\### 4. MFA Interaction
-
-
-
-\*\*Event:\*\*
-
-
-
-The attackers used obtained credentials against Twitter's legitimate systems, resulting in MFA authentication requests.
-
-
-
-\*\*Evidence Source:\*\*
-
-
-
-\- NYDFS Investigation
-
-
-
-\*\*Observation:\*\*
-
-
-
-The incident demonstrates that possession of credentials alone was not the only factor involved; social engineering was also used during the authentication process.
-
-
-
-\---
-
-
-
-\### 5. Internal Access
-
-
-
-\*\*Event:\*\*
-
-
-
-The attackers obtained access to Twitter's internal systems and investigated the company's internal environment.
-
-
-
-\*\*Evidence Source:\*\*
-
-
-
-\- NYDFS Investigation
-
-\- Twitter Official Incident Disclosure
-
-\- SEC Filing
-
-
-
-\*\*Observation:\*\*
-
-
-
-The initial employee compromise enabled further reconnaissance within the organization's internal environment.
-
-
-
-\---
-
-
-
-\### 6. Access to Account Support Tools
-
-
-
-\*\*Event:\*\*
-
-
-
-The attackers targeted employees who had access to internal tools used to support Twitter accounts.
-
-
-
-\*\*Evidence Source:\*\*
-
-
-
-\- NYDFS Investigation
-
-\- Twitter Official Incident Disclosure
-
-
-
-\*\*Observation:\*\*
-
-
-
-Access to privileged internal tools significantly increased the potential impact of the initial compromise.
-
-
-
-\---
-
-
-
-\### 7. Account Compromise and Information Access
-
-
-
-\*\*Event:\*\*
-
-
-
-The attackers used the internal tools to compromise targeted Twitter accounts and access information associated with some accounts.
-
-
-
-\*\*Quantitative Evidence:\*\*
-
-
-
-\- 130 accounts targeted
-
-\- 45 accounts used to send Tweets
-
-\- 36 accounts had their direct-message inbox accessed
-
-\- 7 accounts had Twitter data downloaded
-
-
-
-\*\*Evidence Source:\*\*
-
-
-
-\- Twitter Official Incident Disclosure
-
-\- NYDFS Investigation
-
-
-
-\---
-
-
-
-\### 8. Financial Impact
-
-
-
-\*\*Event:\*\*
-
-
-
-The attackers used compromised accounts as part of a cryptocurrency-related fraud campaign.
-
-
-
-\*\*Quantitative Evidence:\*\*
-
-
-
-More than $118,000 worth of Bitcoin was transferred to attacker-controlled addresses.
-
-
-
-\*\*Evidence Source:\*\*
-
-
-
-\- NYDFS Investigation
-
-
-
-\---
-
-
-
-\### 9. Organizational Response
-
-
-
-\*\*Event:\*\*
-
-
-
-Twitter restricted compromised accounts, revoked access where necessary, investigated the incident, and worked with law enforcement and external investigators.
-
-
-
-\*\*Evidence Source:\*\*
-
-
-
-\- Twitter Official Incident Disclosure
-
-\- NYDFS Investigation
-
-
-
-\*\*Observation:\*\*
-
-
-
-The response focused on containment, investigation, restoration of account access, and strengthening security controls.
-
-
-
-\---
-
-
-
-\## Evidence Classification
-
-
-
-\### Source-Derived Facts
-
-
-
-Facts directly supported by the cited sources.
-
-
-
-\### Our Analysis
-
-
-
-Interpretations based on the documented attack sequence.
-
-
-
-\### General Security Recommendations
-
-
-
-Security controls proposed based on the lessons learned from the incident.
-
-
-
-\---
-
-
-
-\## Sources
-
-
-
-1\. New York Department of Financial Services — Twitter Investigation Report
-
-2\. Twitter — An Update on Our Security Incident
-
-3\. U.S. Securities and Exchange Commission — Twitter Form 10-Q
-
+```text
+Prospective Business Contact Impersonation
+                |
+                v
+Fraudulent Microsoft Document-Sharing Communication
+                |
+                v
+Fraudulent Microsoft 365 Authentication Page
+                |
+                v
+Employee Credential Exposure
+                |
+                v
+Unauthorized Mailbox Access
+                |
+                v
+Sensitive Business / Engineering Information Accessible
+                |
+                v
+Malicious Mailbox Rules Established
+                |
+                v
+Incident Discovered
+        4 August 2026
+                |
+                v
+Affected Account Secured
+                |
+                v
+Malicious Mailbox Rules Disabled
+                |
+                v
+Authentication Controls Reviewed
+                |
+                v
+Public Disclosure
+        6–7 August 2026
